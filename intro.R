@@ -82,30 +82,34 @@ archive_file <- function(file_path, archive_directory) {
   
   # If the 'archive_path' directory does not already exist, create all of
   # the subfolders under "archive" that do not yet exist
-  if (!dir.exists(archive_directory)) {
+  if (!fs::dir_exists(path = archive_directory)) {
     
-    dir.create(
+    fs::dir_create(
       path = archive_directory, 
-      recursive = TRUE   # If "FALSE", can only create one new folder at a time; since it's true, we can create 
+      recurse = TRUE   # If "FALSE", can only create one new folder at a time; since it's true, we can create the entire hierarchy
     )
     
   }
   
+  # Print message to console that file is getting copied
   message(cat(
     emo::ji("hourglass"), 
     "Copying 1 file from \"input\" to \"archive\""
   ))
   
-  file.copy(
-    from = file_path,
-    to = paste0(
+  # Copy file from "input" to "archive" 
+  fs::file_copy(
+    path = file_path, 
+    new_path = paste0(
       archive_directory,
       "/mtcars.csv"
-    )
+    ), 
+    overwrite = TRUE
   )
-  
+
   Sys.sleep(3)
   
+  # Print message to console that file was successfully copied
   message(cat(
     emo::ji("check"), 
     "File successfully copied to", 
@@ -114,6 +118,8 @@ archive_file <- function(file_path, archive_directory) {
   
 }
 
+
+fs::dir
 
 archive_file(
   file_path = "input/mtcars.csv", 
