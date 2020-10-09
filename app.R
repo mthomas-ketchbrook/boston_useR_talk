@@ -1,11 +1,83 @@
 library(shiny)
+library(shinythemes)
 
-ui <- fluidPage(
+ui <- shiny::navbarPage(
+  
+  title = "Boston useR Meetup", 
+  
+  theme = shinythemes::shinytheme(theme = "journal"),
+  
+  # shinythemes::themeSelector(), 
+  
+  inverse = TRUE, 
+  
+  collapsible = TRUE, 
+  
+  shiny::tabPanel(
+    
+    title = "Home", 
+    
+    shiny::fluidRow(
+      
+      shiny::column(
+        width = 4, 
+        shiny::textInput(
+          inputId = "beer_name", 
+          label = "Please Enter the Name of Your Favorite Beer", 
+          placeholder = "Type Beer Name Here"
+        )
+      ), 
+      
+      shiny::column(
+        width = 4,
+        shiny::numericInput(
+          inputId = "abv_value",
+          label = "Please Provide the ABV% of Your Favorite Beer", 
+          value = 6.5, 
+          min = 0.1,
+          max = 15,
+          step = 0.1
+        )
+      ),
+
+      shiny::column(
+        width = 4,
+        shiny::radioButtons(
+          inputId = "cat_or_dog",
+          label = "Are You More of a Cat or Dog Person?",
+          choices = c(emo::ji("cat"), emo::ji("dog"))
+        )
+      )
+
+    ),
+    
+    shiny::hr(), 
+
+    shiny::fluidRow(
+      
+      shiny::column(
+        width = 4, 
+        shiny::actionButton(
+          inputId = "save_btn",
+          label = "Save New Record"
+        )
+      )
+      
+    )
+    
+  )
   
 )
 
+
 server <- function(input, output, session) {
+  
+  # shiny::observeEvent(input$save_btn, {
+  #   
+  #   
+  #   
+  # })
   
 }
 
-shinyApp(ui, server)
+shiny::shinyApp(ui = ui, server = server)
