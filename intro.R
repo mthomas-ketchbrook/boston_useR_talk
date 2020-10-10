@@ -1,13 +1,15 @@
 library(dplyr)
 library(fs)
 library(RSQLite)
+library(DBI)
 library(emo)
+library(tibble)
 
 
-con <- RSQLite::dbConnect(
-  drv = RSQLite::SQLite(), 
-  "database/db-main.sqlite"
-)
+# con <- RSQLite::dbConnect(
+#   drv = RSQLite::SQLite(), 
+#   "database/db-main.sqlite"
+# )
 
 mtcars %>% 
   write.csv(
@@ -128,8 +130,30 @@ archive_file(
 
 fs::dir_tree()
 
-
-
 file.rename()
 
 file.remove()
+
+
+
+
+# SQLite Setup ------------------------------------------------------------
+
+con <- RSQLite::dbConnect(
+  drv = RSQLite::SQLite(), 
+  "database/db-main.sqlite"
+)
+
+app_history <- tibble::tibble(
+  BeerName = character(0), 
+  AbvValue = numeric(0), 
+  CatOrDog = character(0),  
+  UserName = character(0)
+)
+
+# Create AppHistoryTable
+RSQLite::dbWriteTable(
+  conn = con,
+  name = "AppHistoryTable",
+  value = app_history
+)

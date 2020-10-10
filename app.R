@@ -1,15 +1,31 @@
 library(shiny)
 library(shinythemes)
+library(RSQLite)
+library(DBI)
+library(glue)
+
+source("funs.R")
+
+con <- RSQLite::dbConnect(
+  drv = RSQLite::SQLite(), 
+  "database/db-main.sqlite"
+)
+
+on.exit(
+  DBI::dbDisconnect(conn = con), 
+  add = TRUE
+)
+
 
 ui <- shiny::navbarPage(
   
   title = "Boston useR Meetup", 
   
-  theme = shinythemes::shinytheme(theme = "journal"),
+  theme = shinythemes::shinytheme(theme = "darkly"),
   
   # shinythemes::themeSelector(), 
   
-  inverse = TRUE, 
+  inverse = TRUE,
   
   collapsible = TRUE, 
   
@@ -30,7 +46,7 @@ ui <- shiny::navbarPage(
       
       shiny::column(
         width = 4,
-        shiny::numericInput(
+        shiny::sliderInput(
           inputId = "abv_value",
           label = "Please Provide the ABV% of Your Favorite Beer", 
           value = 6.5, 
@@ -72,11 +88,25 @@ ui <- shiny::navbarPage(
 
 server <- function(input, output, session) {
   
-  # shiny::observeEvent(input$save_btn, {
-  #   
-  #   
-  #   
-  # })
+  shiny::observeEvent(input$save_btn, {
+    
+    shiny::req(!is.null(input$beer_name))
+    
+    con <- RSQLite::dbConnect(
+      drv = RSQLite::SQLite(), 
+      "database/db-main.sqlite"
+    )
+    
+    save_to_db(
+      sql_con = con, 
+      beer = input$beer_name, 
+      abv = input$abv_value, 
+      cat_dog_choice = input$cat_or_dog
+    )
+    
+    DBI::dbDisconnect(conn = con)
+
+  })
   
 }
 
