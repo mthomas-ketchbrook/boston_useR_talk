@@ -6,11 +6,9 @@ library(emo)
 library(tibble)
 
 
-# con <- RSQLite::dbConnect(
-#   drv = RSQLite::SQLite(), 
-#   "database/db-main.sqlite"
-# )
+# Write Dataframe to File --------------------------------------------
 
+# Write the 'mtcars' dataset to a .csv file in the "/input/" directory
 mtcars %>% 
   write.csv(
     file = "input/mtcars.csv", 
@@ -27,7 +25,7 @@ fs::dir_tree()
 # message to the console
 if (length(list.files(path = "input")) > 0) {
   
-  # Capture the number of files in the "input" directory
+  # Capture the number of file in the "input" directory
   num_files <- length(
     list.files(path = "input")
   )
@@ -80,6 +78,9 @@ archive_dir_name <- paste0(
 )
 
 
+# Copying & Moving Files ---------------------------
+
+# Create a custom function to move the file from "input" to "archive"
 archive_file <- function(file_path, archive_directory) {
   
   # If the 'archive_path' directory does not already exist, create all of
@@ -120,30 +121,37 @@ archive_file <- function(file_path, archive_directory) {
   
 }
 
-
-fs::dir
-
+# Execute our 'archive_file()' custom function
 archive_file(
   file_path = "input/mtcars.csv", 
   archive_directory = archive_dir_name
 )
 
+# View the recursive directory tree
 fs::dir_tree()
 
-file.rename()
-
-file.remove()
-
-
+# Rename the archived file to "historic_data.csv"
+fs::file_move(
+  path = list.files(
+    path = archive_dir_name, 
+    full.names = TRUE
+  ), 
+  new_path = paste0(
+    archive_dir_name, 
+    "/historic_data.csv"
+  )
+)
 
 
 # SQLite Setup ------------------------------------------------------------
 
+# Create the a new SQLite database
 con <- RSQLite::dbConnect(
   drv = RSQLite::SQLite(), 
   "database/db-main.sqlite"
 )
 
+# Create the table schema 
 app_history <- tibble::tibble(
   BeerName = character(0), 
   AbvValue = numeric(0), 
@@ -151,7 +159,7 @@ app_history <- tibble::tibble(
   UserName = character(0)
 )
 
-# Create AppHistoryTable
+# Create AppHistoryTable table in SQLite db using the schema
 RSQLite::dbWriteTable(
   conn = con,
   name = "AppHistoryTable",
