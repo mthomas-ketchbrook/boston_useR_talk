@@ -19,9 +19,16 @@ save_to_db <- function(sql_con, beer, abv, cat_dog_choice) {
     .con = sql_con
   )
   
-  DBI::dbSendStatement(
+  DBI::dbExecute(
     conn = sql_con, 
     statement = sql_stmt
+  )
+  
+  print(
+    paste0(
+      "One record successfully added to the database by user: ", 
+      user
+    )
   )
   
 }
