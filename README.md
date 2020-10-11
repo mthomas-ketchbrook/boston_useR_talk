@@ -13,3 +13,10 @@ This code in this talk utilizes two unique packages, the [**fs** package](https:
 1. The **fs** package is used to interface with the file system (create directories, move files, etc.). Though R has base functions that do a lot of this (`dir.create()`, `file.copy()`, etc.), a list of reasons why **fs** functions are a safer choice can be found [here](https://github.com/r-lib/fs#comparison-vs-base-equivalents).  
 
 2. The **DBI** package is used to interface with the database management systems, such as Postgres, SQL Server, SQLite, etc. In this talk, we will showcase how to send SQL statements to a SQLite database via the functions in this package.
+
+## How it All Works Together...
+
+The talk begins by demonstrating moving around the file system with both base R and the **fs** package. The [intro.R](intro.R) script demonstrates how to write a dataframe to a delimited file, remove files from a directory, copying a file from one directory to another, and renaming files. At the end of the script a [SQLite database](database/db-main.sqlite) (and database table) are created.  
+
+The second part of the talk showcases how to use the **DBI** package to write data to a SQLite database. A [Shiny app](app.R) was created to demonstrate how a user's manual input, as well as a user's characteristics (using R environmental variables garnered from the `Sys.getenv()` base R function) can be captured within a Shiny app and written to a SQLite database with -- literally -- the *"click of a button!"*.
+
