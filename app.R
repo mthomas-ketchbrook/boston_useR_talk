@@ -90,7 +90,7 @@ server <- function(input, output, session) {
   
   shiny::observeEvent(input$save_btn, {
     
-    shiny::req(!is.null(input$beer_name))
+    shiny::req(nchar(input$beer_name) > 0)
     
     con <- RSQLite::dbConnect(
       drv = RSQLite::SQLite(), 

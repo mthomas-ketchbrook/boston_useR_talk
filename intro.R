@@ -53,8 +53,17 @@ if (length(list.files(path = "input")) > 0) {
     )
   )
   
+  # Remove the 'num_files' object from the environment.
+  # The 'rm()' function can be useful when you are building scripts that are
+  # very memory-intensive; this function can free up memory after you are done
+  # using an object in your script so that the rest of your script can run a 
+  # lot faster.
+  rm(num_files)
+  
 }
 
+
+# Put the file back in the "input" directory
 mtcars %>% 
   write.csv(
     file = "input/mtcars.csv", 
@@ -83,7 +92,7 @@ archive_dir_name <- paste0(
 # Create a custom function to move the file from "input" to "archive"
 archive_file <- function(file_path, archive_directory) {
   
-  # If the 'archive_path' directory does not already exist, create all of
+  # If the 'archive_directory' folder does not already exist, create all of
   # the subfolders under "archive" that do not yet exist
   if (!fs::dir_exists(path = archive_directory)) {
     
@@ -121,6 +130,7 @@ archive_file <- function(file_path, archive_directory) {
   
 }
 
+
 # Execute our 'archive_file()' custom function
 archive_file(
   file_path = "input/mtcars.csv", 
@@ -148,6 +158,11 @@ fs::file_move(
 
 system("powershell Start-Process \"chrome.exe\" \"www.rstudio.com\"")
 
+
+
+# Get Environmental Variables ---------------------------------------------
+
+Sys.getenv()
 
 # SQLite Setup ------------------------------------------------------------
 
