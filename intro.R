@@ -143,6 +143,12 @@ fs::file_move(
 )
 
 
+
+# Interface with Command Line / Powershell --------------------------------
+
+system("powershell Start-Process \"chrome.exe\" \"www.rstudio.com\"")
+
+
 # SQLite Setup ------------------------------------------------------------
 
 # Create the a new SQLite database
