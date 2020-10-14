@@ -162,7 +162,11 @@ system("powershell Start-Process \"chrome.exe\" \"www.rstudio.com\"")
 
 # Get Environmental Variables ---------------------------------------------
 
+# Get a list of all of the environmental variable names & their values
 Sys.getenv()
+
+# Return the value of a particular environmental variable
+Sys.getenv("NUMBER_OF_PROCESSORS")
 
 # SQLite Setup ------------------------------------------------------------
 
