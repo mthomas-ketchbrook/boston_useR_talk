@@ -1,9 +1,19 @@
-library(dplyr)
-library(fs)
-library(RSQLite)
-library(DBI)
-library(emo)
-library(tibble)
+# Beyond R-Stats: Workflow Management & Data Engineering in R
+# 2020-10-20
+# Michael Thomas - Ketchbrook Analytics
+
+library(fs)   # navigate file system
+library(RSQLite)   # work with SQLite dbs
+
+library(dplyr)   # data manipulation
+library(tibble)   # tidy tables
+library(emo)   # add emojis to our print statements
+library(lubridate)   # work with dates
+
+
+
+# Replicate "tree" command line call to show directory structure
+fs::dir_tree()
 
 
 # Write Dataframe to File --------------------------------------------
