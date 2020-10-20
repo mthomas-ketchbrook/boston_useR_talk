@@ -6,24 +6,12 @@ library(glue)
 
 source("funs.R")
 
-con <- RSQLite::dbConnect(
-  drv = RSQLite::SQLite(), 
-  "database/db-main.sqlite"
-)
-
-on.exit(
-  DBI::dbDisconnect(conn = con), 
-  add = TRUE
-)
-
 
 ui <- shiny::navbarPage(
   
   title = "Boston useR Meetup", 
   
-  theme = shinythemes::shinytheme(theme = "darkly"),
-  
-  # shinythemes::themeSelector(), 
+  theme = shinythemes::shinytheme(theme = "darkly"), 
   
   inverse = TRUE,
   
