@@ -119,6 +119,7 @@ archive_file <- function(file_path, archive_directory) {
     overwrite = TRUE
   )
 
+  # Simulate a time-intensive process
   Sys.sleep(3)
   
   # Print message to console that file was successfully copied
@@ -157,7 +158,6 @@ fs::file_move(
 # Interface with Command Line / Powershell --------------------------------
 
 system("powershell Start-Process \"chrome.exe\" \"www.rstudio.com\"")
-
 
 
 # Get Environmental Variables ---------------------------------------------
