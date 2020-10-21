@@ -3,7 +3,8 @@
 # Michael Thomas - Ketchbrook Analytics
 
 library(fs)   # navigate file system
-library(RSQLite)   # work with SQLite dbs
+library(DBI)   # work with databases
+library(RSQLite)   # get driver to connect to SQLite db
 
 library(dplyr)   # data manipulation
 library(tibble)   # tidy tables
@@ -181,7 +182,7 @@ Sys.getenv("NUMBER_OF_PROCESSORS")
 # SQLite Setup ------------------------------------------------------------
 
 # Create the a new SQLite database
-con <- RSQLite::dbConnect(
+con <- DBI::dbConnect(
   drv = RSQLite::SQLite(), 
   "database/db-main.sqlite"
 )
@@ -195,7 +196,7 @@ app_history <- tibble::tibble(
 )
 
 # Create AppHistoryTable table in SQLite db using the schema
-RSQLite::dbWriteTable(
+DBI::dbWriteTable(
   conn = con,
   name = "AppHistoryTable",
   value = app_history

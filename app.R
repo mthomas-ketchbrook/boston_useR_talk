@@ -1,7 +1,7 @@
 library(shiny)
 library(shinythemes)
-library(RSQLite)
 library(DBI)
+library(RSQLite)
 library(glue)
 
 source("funs.R")
@@ -80,7 +80,7 @@ server <- function(input, output, session) {
     
     shiny::req(nchar(input$beer_name) > 0)
     
-    con <- RSQLite::dbConnect(
+    con <- DBI::dbConnect(
       drv = RSQLite::SQLite(), 
       "database/db-main.sqlite"
     )
