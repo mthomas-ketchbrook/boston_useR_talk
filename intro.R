@@ -19,6 +19,9 @@ fs::dir_tree()
 
 # Write Dataframe to File --------------------------------------------
 
+# If it doesn't already exist, create a new folder named "input"
+fs::dir_create("input")
+
 # Write the 'mtcars' dataset to a .csv file in the "/input/" directory
 mtcars %>% 
   write.csv(
@@ -181,7 +184,11 @@ Sys.getenv("NUMBER_OF_PROCESSORS")
 
 # SQLite Setup ------------------------------------------------------------
 
-# Create the a new SQLite database
+# If it doesn't already exist, create a folder called "database"
+fs::dir_create("database")
+
+# If it doesn't already exist, create the a new SQLite database file called  
+# "db-main" in our "database" directory
 con <- DBI::dbConnect(
   drv = RSQLite::SQLite(), 
   "database/db-main.sqlite"

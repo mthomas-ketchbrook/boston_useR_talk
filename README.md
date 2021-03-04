@@ -4,11 +4,9 @@
 
 # Beyond R-*stats*: Workflow Management & Data Engineering in R
 
-This repository contains materials associated with the lightning talk given at the [Boston useR Group](https://www.meetup.com/Boston-useR/) meetup on October 20, 2020. 
+This repository contains materials associated with the lightning talk given at the [Boston useR Group](https://www.meetup.com/Boston-useR/events/273566159/) meetup on October 20, 2020. 
 
 The file [intro.R](intro.R) provides examples of the R functions discussed in the lightning talk.
-
-**Note**: *in order to run the [intro.R](intro.R) script in its entirety, you will need to first create a new empty folder called "database" and a new empty folder called "input" in the project's working directory.*
 
 This code in this talk utilizes two unique packages, the [**fs** package](https://github.com/r-lib/fs) and the [**DBI** package](https://github.com/r-dbi/DBI):  
 
@@ -21,4 +19,3 @@ This code in this talk utilizes two unique packages, the [**fs** package](https:
 The talk begins by demonstrating moving around the file system with both base R and the **fs** package. The [intro.R](intro.R) script demonstrates how to write a dataframe to a delimited file, remove files from a directory, copying a file from one directory to another, and renaming files. At the end of the script, a [SQLite database](database/db-main.sqlite) (and database table) are created.  
 
 The second part of the talk showcases how to use the **DBI** package to write data to a SQLite database. A [Shiny app](app.R) was created to demonstrate how a user's manual input, as well as a user's characteristics (using R environmental variables garnered from the `Sys.getenv()` base R function) can be captured within a Shiny app and written to a SQLite database with -- literally -- the *"click of a button!"*.
-
