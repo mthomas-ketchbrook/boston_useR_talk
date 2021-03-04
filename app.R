@@ -6,7 +6,6 @@ library(glue)
 
 source("funs.R")
 
-
 ui <- shiny::navbarPage(
   
   title = "Boston useR Meetup", 
@@ -80,10 +79,14 @@ server <- function(input, output, session) {
     
     shiny::req(nchar(input$beer_name) > 0)
     
+    fs::dir_create("database")
+    
     con <- DBI::dbConnect(
       drv = RSQLite::SQLite(), 
       "database/db-main.sqlite"
     )
+    
+    make_db(sql_con = con)
     
     save_to_db(
       sql_con = con, 

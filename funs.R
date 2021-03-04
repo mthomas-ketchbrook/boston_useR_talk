@@ -1,3 +1,32 @@
+# Make the "AppHistoryTable" in the 'db-main' SQLite database if the table does
+# not already exist
+make_db <- function(sql_con) {
+  
+  if (DBI::dbExistsTable(conn = sql_con, name = "AppHistoryTable") == FALSE) {
+    
+    # Create the table schema 
+    app_history <- tibble::tibble(
+      BeerName = character(0), 
+      AbvValue = numeric(0), 
+      CatOrDog = character(0),  
+      UserName = character(0)
+    )
+    
+    # Create AppHistoryTable table in SQLite db using the schema
+    DBI::dbWriteTable(
+      conn = sql_con,
+      name = "AppHistoryTable",
+      value = app_history
+    )
+    
+    print("Created new table \"AppHistoryTable\" in \'db-main'\ database")
+    
+  }
+  
+}
+
+
+# Save user input as a new record in the SQL database
 save_to_db <- function(sql_con, beer, abv, cat_dog_choice) {
   
   user <- Sys.getenv("USERNAME")
