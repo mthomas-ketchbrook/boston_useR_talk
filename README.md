@@ -16,6 +16,6 @@ This code in this talk utilizes two unique packages, the [**fs** package](https:
 
 ## How it All Works Together...
 
-The talk begins by demonstrating moving around the file system with both base R and the **fs** package. The [intro.R](intro.R) script demonstrates how to write a dataframe to a delimited file, remove files from a directory, copying a file from one directory to another, and renaming files. At the end of the script, a [SQLite database](database/db-main.sqlite) (and database table) are created.  
+The talk begins by demonstrating moving around the file system with both base R and the **fs** package. The [intro.R](intro.R) script demonstrates how to write a dataframe to a delimited file, remove files from a directory, copying a file from one directory to another, and renaming files. At the end of the script, a SQLite database (and database table) are created.  
 
 The second part of the talk showcases how to use the **DBI** package to write data to a SQLite database. A [Shiny app](app.R) was created to demonstrate how a user's manual input, as well as a user's characteristics (using R environmental variables garnered from the `Sys.getenv()` base R function) can be captured within a Shiny app and written to a SQLite database with -- literally -- the *"click of a button!"*.
